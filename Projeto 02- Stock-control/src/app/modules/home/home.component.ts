@@ -1,11 +1,11 @@
-import { AuthRequest } from './../../models/interfaces/user/auth/authRequest';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SignupUserRequest } from 'src/app/models/interfaces/user/SignupUserRequest';
-import { CookieService } from 'ngx-cookie-service';
-import { UserService } from './../../services/user/user.service';
-
 import { SignupUserResponse } from 'src/app/models/interfaces/user/SignupUserResponse';
+import { AuthRequest } from 'src/app/models/interfaces/user/auth/authRequest';
+import { UserService } from 'src/app/services/user/user.service';
+import { CookieService } from 'ngx-cookie-service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-home',
@@ -29,23 +29,39 @@ export class HomeComponent {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private MessageService: MessageService
   ) {}
 
   onSubmitLoginForm(): void {
     if (this.loginForm.value && this.loginForm.valid) {
-      this.userService.authUser(this.loginForm.value as AuthRequest).subscribe({
+      this.userService.authUser(this.loginForm.value as AuthRequest)
+      .subscribe({
         next: (response) => {
           if (response) {
             this.cookieService.set('USER_INFO', response?.token);
-
             this.loginForm.reset();
+
+            this.MessageService.add({
+              severity: 'sucess',
+              summary: 'sucesso',
+              detail: `Bem vindo de volta ${response?.name}!`,
+              life: 2000,
+            })
           }
         },
-        error: (err) => console.log(err),
-      });
-    }
+        error: (err) => {
+          this.MessageService.add({
+            severity: 'error',
+            summary: 'erro',
+            detail: `Erro ao fazer login!`,
+            life: 2000,
+          });
+          console.log(err);
+      },
+    });
   }
+}
 
   onSubmitSignupForm(): void {
     if (this.signupForm.value && this.signupForm.valid) {
@@ -54,11 +70,27 @@ export class HomeComponent {
       .subscribe({
         next: (response) => {
           if (response) {
-            alert('Usuário teste criado com sucesso!')
-          }
-        },
-        error: (err) => console.log(err),
-      })
-    }
-  }
+            alert('Usuário teste criado com sucesso!');
+            this.signupForm.reset();
+            this.loginCard = true;
+            this.MessageService.add({
+              severity: 'sucess',
+              summary: 'sucesso',
+              detail: 'Usuário criado com sucesso!',
+              life: 2000,
+          });
+        }
+      },
+        error: (err) => {
+          this.MessageService.add({
+            severity: 'error',
+            summary: 'erro',
+            detail: `Erro ao criar usuário!`,
+            life: 2000,
+      });
+      console.log(err);
+    },
+  });
+}
+}
 }
