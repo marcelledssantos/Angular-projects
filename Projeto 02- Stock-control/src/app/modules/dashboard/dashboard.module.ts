@@ -1,16 +1,20 @@
-import { SidebarModule } from 'primeng/sidebar';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardHomeComponent } from './page/dashboard-home/dashboard-home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { DASHBOARD_ROUTES } from './dashboard.routing';
+
+import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
+import { ChartModule } from 'primeng/chart';
 import { MessageService } from 'primeng/api';
+
+import { DashboardHomeComponent } from './page/dashboard-home/dashboard-home.component';
 import { CookieService } from 'ngx-cookie-service';
+import { DASHBOARD_ROUTES } from './dashboard.routing';
+
 
 
 
@@ -26,7 +30,8 @@ import { CookieService } from 'ngx-cookie-service';
     ButtonModule,
     ToolbarModule,
     CardModule,
-    ToastModule
+    ToastModule,
+    ChartModule
   ],
   providers: [MessageService, CookieService]
 })
