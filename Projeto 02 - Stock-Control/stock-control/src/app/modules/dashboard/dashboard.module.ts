@@ -13,7 +13,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 
 import { DashboardHomeComponent } from './page/dashboard-home/dashboard-home.component';
-import { DASHBOARD_ROUTES } from './dashboard.routing';
+import { DASHBOARD_ROUTES } from './dasboard.routing';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({

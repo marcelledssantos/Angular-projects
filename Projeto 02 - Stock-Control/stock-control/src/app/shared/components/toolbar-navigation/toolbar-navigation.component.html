@@ -1,7 +1,6 @@
 <p-toolbar styleClass="bg-indigo-800">
   <div class="p-toolbar-group-start">
     <p-button
-      icon="pi pi-home"
       label="Dashboard"
       routerLink="/dashboard"
       styleClass="bg-indigo-800 p-button-secondary"
@@ -12,7 +11,6 @@
   <div class="p-toolbar-group-center">
     <p-button
       label="Produtos"
-      icon="pi pi-cart-plus"
       routerLink="/products"
       styleClass="bg-indigo-800 p-button-secondary"
       routerLinkActive="exact_route"
@@ -20,7 +18,6 @@
     ></p-button>
     <p-button
       label="Categorias"
-      icon="pi pi-ticket"
       routerLink="/categories"
       styleClass="bg-indigo-800 p-button-secondary"
       routerLinkActive="exact_route"
@@ -28,11 +25,17 @@
     ></p-button>
     <p-button
       label="Efetuar Venda"
-      icon="pi pi-credit-card"
       styleClass="bg-indigo-800 p-button-secondary"
       routerLinkActive="exact_route"
       routerLink="/products"
       class="mr-2"
+    ></p-button>
+  </div>
+  <div class="p-toolbar-group-end">
+    <p-button
+    label="Sair"
+    styleClass="p-button-danger"
+    (onClick)="handleLogout()"
     ></p-button>
   </div>
 </p-toolbar>
