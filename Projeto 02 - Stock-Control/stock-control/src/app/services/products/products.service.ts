@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ProductsService {
+  [x: string]: any;
   private API_URL = environment.API_URL;
   private JTW_TOKEN = this.cookie.get('USER_INFO');
   private httpOptions = {
