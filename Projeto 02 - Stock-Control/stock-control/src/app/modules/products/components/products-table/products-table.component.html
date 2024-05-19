@@ -16,7 +16,7 @@
     [rowHover]="true"
     [showCurrentPageReport]="true"
     dataKey="id"
-    currentPageReportTemplate="Monstrando {first} de {last} de {totalRecords} produtos"
+    currentPageReportTemplate="Monstrando {first} de {totalRecords} produtos"
     >
       <ng-template pTemplate="header">
         <tr>
@@ -157,6 +157,7 @@
                 class="p-button-rounded p-button-danger"
                 pTooltip="Excluir produto"
                 tooltipPosition="top"
+                (click)="handleDeleteProduct(product?.id, product?.name)"
                 ></button>
               </div>
             </td>
