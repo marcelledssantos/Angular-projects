@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { GetCategoriesResponse } from 'src/app/models/interfaces/categories/response/getCategoriesResponse';
+import { GetCategoriesResponse } from 'src/app/models/interfaces/categories/responses/GetCategoriesResponse'
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -25,5 +25,14 @@ export class CategoriesService {
         this.httpOptions
       );
     }
+    deleteCategory(requestDatas: { category_id: string }): Observable<void> {
+      return this.http.delete<void>(`${this.API_URL}/category/delete`, {
+        ...this.httpOptions,
+        params: {
+          category_id: requestDatas?.category_id,
+        },
+      });
+    }
   }
+
 

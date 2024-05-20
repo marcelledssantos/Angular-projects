@@ -6,7 +6,7 @@ import { CategoriesService } from 'src/app/services/categories/categories.servic
 import { ProductsService } from 'src/app/services/products/products.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
-import { GetCategoriesResponse } from 'src/app/models/interfaces/categories/response/getCategoriesResponse';
+import { GetCategoriesResponse } from 'src/app/models/interfaces/categories/responses/GetCategoriesResponse'
 import { CreateProductRequest } from 'src/app/models/interfaces/products/request/CreateProductRequest';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { EventAction } from 'src/app/models/interfaces/products/event/eventAction';
