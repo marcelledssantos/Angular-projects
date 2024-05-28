@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SignupUserRequest } from 'src/app/models/interfaces/user/SignupUserRequest';
 import { AuthRequest } from 'src/app/models/interfaces/user/auth/AuthRequest';
@@ -13,11 +13,11 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnDestroy {
+export class HomeComponent implements AfterViewInit{
+  @ViewChild('emailInput') public emailInputRef!: ElementRef;
+  @ViewChild('passwordInput') public passwordInputRef!: ElementRef;
 
-  private destroy$ = new Subject<void>();
   loginCard = true;
-
   loginForm = this.formBuilder.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
@@ -37,10 +37,16 @@ export class HomeComponent implements OnDestroy {
     private router: Router
   ) {}
 
+  ngAfterViewInit(): void {
+    this.emailInputRef.nativeElement.value = 'Seu email aqui';
+    this.passwordInputRef.nativeElement.value = 'Sua senha aqui';
+    console.log('EMAIL INPUT =>', this.emailInputRef.nativeElement.value);
+    console.log('PASSWORD INPUT =>', this.passwordInputRef.nativeElement.value);
+  }
+
   onSubmitLoginForm(): void {
     if (this.loginForm.value && this.loginForm.valid) {
       this.userService.authUser(this.loginForm.value as AuthRequest)
-        .pipe(takeUntil(this.destroy$))
         .subscribe({
       next: (response) => {
           if (response) {
@@ -73,7 +79,6 @@ export class HomeComponent implements OnDestroy {
     if (this.signupForm.value && this.signupForm.valid) {
       this.userService
         .signupUser(this.signupForm.value as SignupUserRequest)
-        .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (response) => {
             if (response) {
@@ -98,10 +103,5 @@ export class HomeComponent implements OnDestroy {
           },
         });
     }
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

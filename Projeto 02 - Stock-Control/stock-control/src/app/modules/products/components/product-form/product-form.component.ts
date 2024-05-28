@@ -184,20 +184,20 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         .SaleProduct(requestDatas)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
-          next: (response: any) => {
+          next: (response) => {
             if (response) {
               this.messageService.add({
                 severity: 'success',
                 summary: 'Sucesso',
                 detail: 'Venda efetuada com sucesso!',
-                life: 3000,
+                life: 4000,
               });
               this.saleProductForm.reset();
               this.getProductDatas();
               this.router.navigate(['/dashboard']);
             }
           },
-          error: (err: any) => {
+          error: (err) => {
             console.log(err);
             this.saleProductForm.reset();
             this.messageService.add({
